@@ -41,12 +41,6 @@ update:
 .PHONY: pre-commit-install
 pre-commit-install: .git/hooks/pre-commit
 
-# .PHONY: format
-# format: poetry.lock
-# 	find src/ tests/ -name '*.py' | xargs poetry run pyupgrade --exit-zero-even-if-changed --py{{ cookiecutter.python_version.replace('.', '') }}-plus
-# 	poetry run isort --settings-path pyproject.toml ./src ./tests
-# 	poetry run black --config pyproject.toml ./src ./tests
-
 .PHONY: test
 test: poetry.lock
 	poetry run pytest -c pyproject.toml --xdoctest ./tests ./src
