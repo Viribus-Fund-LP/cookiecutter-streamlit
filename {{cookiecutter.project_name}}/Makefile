@@ -28,10 +28,6 @@ poetry.lock: pyproject.toml .first-build
 	-poetry run mypy --install-types --non-interactive ./src ./tests
 	touch poetry.lock
 
-# .git:
-# 	git init
-# 	git remote add origin git@github.com:{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}.git
-
 .git/hooks/pre-commit: .git poetry.lock .pre-commit-config.yaml .pre-commit-hook
 	poetry run pre-commit install -f
 	install -m755 .pre-commit-hook .git/hooks/pre-commit
