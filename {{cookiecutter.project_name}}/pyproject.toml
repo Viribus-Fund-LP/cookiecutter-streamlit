@@ -2,7 +2,7 @@
 name = "{{cookiecutter.project_name}}"
 version = "{{cookiecutter.version}}"
 description = "{{cookiecutter.friendly_name}}"
-authors = [""]
+authors = ["John Smith <john@example.com>"]
 readme = "README.md"
 {% if cookiecutter.package_name != cookiecutter.project_name.replace('-', '_') -%}
 packages = [
