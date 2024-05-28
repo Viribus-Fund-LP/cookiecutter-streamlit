@@ -2,12 +2,14 @@
 name = "{{cookiecutter.project_name}}"
 version = "{{cookiecutter.version}}"
 description = "{{cookiecutter.friendly_name}}"
+authors = [""]
 readme = "README.md"
 {% if cookiecutter.package_name != cookiecutter.project_name.replace('-', '_') -%}
 packages = [
     { include = "{{cookiecutter.package_name}}", from = "src" },
 ]
 {% endif -%}
+
 
 [tool.poetry.dependencies]
 python = "^3.7"
