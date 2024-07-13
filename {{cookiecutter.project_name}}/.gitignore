@@ -194,3 +194,4 @@ __pycache__/
 
 .env
 .envrc
+.history/
