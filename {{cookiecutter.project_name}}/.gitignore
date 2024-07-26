@@ -108,6 +108,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.envrc
 
 # Spyder project settings
 .spyderproject
@@ -124,10 +125,14 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-.DS_Store
+# streamlit
+.streamlit/
+lib/streamlit/static
+streamlit-storage
+lib/Pipfile.lock
+
+# extras
 .huskyrc.json
-out
-log.log
 **/node_modules
 *.pyc
 *.vsix
@@ -170,6 +175,7 @@ pydevd*.log
 nodeLanguageServer/**
 nodeLanguageServer.*/**
 dist/**
+
 # translation files
 *.xlf
 package.nls.*.json
@@ -177,6 +183,7 @@ l10n/
 native_locator/target/**
 native_locator/Cargo.lock
 
+# more extras?
 .mypy_cache/
 /.coverage
 /.coverage.*
@@ -187,11 +194,7 @@ native_locator/Cargo.lock
 /docs/_build/
 /src/*.egg-info/
 __pycache__/
-
-
 **/__pycache__/**
 
-
-.env
-.envrc
-.history/
+#
+.scratch/

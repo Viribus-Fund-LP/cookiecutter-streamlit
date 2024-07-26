@@ -4,6 +4,7 @@ from uuid import uuid4
 
 import pandas as pd
 import snowflake.connector
+from dotenv import dotenv_values
 from snowflake.connector.compat import IS_STR
 from snowflake.connector.pandas_tools import write_pandas
 
@@ -71,6 +72,12 @@ def URL(**db_parameters):
 
 
 def connect(**kwargs):
+    if not kwargs:
+        kwargs = dict(
+            account=dotenv_values(".env")["SNOWFLAKE_ACCOUNT"],
+            user=dotenv_values(".env")["SNOWFLAKE_USER"],
+            password=dotenv_values(".env")["SNOWFLAKE_PASSWORD"],
+        )
     snowflake.connector.paramstyle = "numeric"
     return snowflake.connector.connect(**kwargs, client_session_keep_alive=True)
 
@@ -90,14 +97,22 @@ class Snowflake:
     def execute(self, sql, **kwargs):
         return self.conn.cursor().execute(sql, **kwargs)
 
-    def write_pandas(self, df, table_name, quote_identifiers=False, index=False, **kwargs):
+    def write_pandas(
+        self, df, table_name, quote_identifiers=False, index=False, **kwargs
+    ):
         _df = df.rename(columns=lambda x: x.upper())
         if index:
             raise NotImplementedError("Passing index=True is not supported")
 
-        if not (isinstance(_df.index, pd.RangeIndex) and 1 == _df.index.step and 0 == _df.index.start):
+        if not (
+            isinstance(_df.index, pd.RangeIndex)
+            and 1 == _df.index.step
+            and 0 == _df.index.start
+        ):
             if index:
-                raise Exception("index=True and index is not RangeIndex, if you want to keep index call reset_index()")
+                raise Exception(
+                    "index=True and index is not RangeIndex, if you want to keep index call reset_index()"
+                )
             else:
                 _df = _df.reset_index(drop=True)
                 _df.index = pd.RangeIndex(0, len(_df.index), 1)
@@ -110,4 +125,3 @@ class Snowflake:
             index=index,
             **kwargs,
         )
-

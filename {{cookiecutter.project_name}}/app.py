@@ -1,6 +1,5 @@
 import os
 
-import pandas as pd
 import streamlit as st
 
 ### These need to specifically be here
@@ -29,6 +28,16 @@ def is_local():
 
 def main():
     st.title("Hello world!")
+
+    def test():
+        from {{cookiecutter.package_name}}.sf import Snowflake
+
+        conn = Snowflake()
+        assert conn.query("select 1").iat[0, 0] == 1
+
+    test()
+
+    st.text("Snowflake connection test passed!")
 
 
 if __name__ == "__main__":
