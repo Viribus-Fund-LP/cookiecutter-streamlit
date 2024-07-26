@@ -111,30 +111,3 @@ class Snowflake:
             **kwargs,
         )
 
-    def portfolio_to_temp_table(self, df):
-        # TODO genericize this and put it somewhere else
-        tbl = temp_table_name().upper()
-        self.execute(
-            """
-        create or replace temp table identifier(:1) (
-            iso varchar,
-            ftrid int,
-            startdate date,
-            term int,
-            peaktype varchar,
-            hedgetype varchar,
-            tradetype varchar,
-            sourceid int,
-            sinkid int,
-            mw number(38,1),
-            bid number(38,2),
-            meta object
-        )
-        """,
-            params=[tbl],
-        ).fetchall()
-
-        res = self.write_pandas(df=df, table_name=tbl, index=False)
-        assert res[0], "Write failed"
-
-        return tbl, res

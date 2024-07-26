@@ -1,5 +1,5 @@
 {
-  "project_name": "hypermodern-python",
+  "project_name": "replace-me",
   "package_name": "{{ cookiecutter.project_name.replace('-', '_') }}",
   "friendly_name": "{{ cookiecutter.project_name.replace('-', ' ').title() }}",
   "version": "0.0.0"
